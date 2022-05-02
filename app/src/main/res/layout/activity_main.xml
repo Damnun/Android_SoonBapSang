@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/text_login_id"
+            android:layout_width="458dp"
+            android:layout_height="69dp"
+            android:layout_marginStart="71dp"
+            android:layout_marginTop="559dp"
+            android:layout_marginEnd="72dp"
+            android:layout_marginBottom="334dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/text_login_password"
+            android:layout_width="459dp"
+            android:layout_height="63dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="426dp"
+            android:layout_marginEnd="72dp"
+            android:layout_marginBottom="473dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_login"
+            android:layout_width="401dp"
+            android:layout_height="58dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="725dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginBottom="179dp"
+            android:text="로그인"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_register"
+            android:layout_width="401dp"
+            android:layout_height="58dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="798dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginBottom="106dp"
+            android:text="간편 회원가입"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
