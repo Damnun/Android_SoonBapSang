@@ -1,9 +1,13 @@
 package com.example.midtermproj;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 import android.os.AsyncTask;
 
@@ -17,6 +21,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class LoginPage extends Activity {
     private String jsonString;
@@ -27,7 +32,27 @@ public class LoginPage extends Activity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.login);
         Button loginButton = (Button) findViewById(R.id.login_login_button);
+        Button registerButton = (Button) findViewById(R.id.login_register_button);
+        EditText idText = (EditText) findViewById(R.id.login_id);
+        EditText pwText = (EditText) findViewById(R.id.login_password);
 
+
+        // 숫자 혹은 영어만 사용하는 필터
+        InputFilter filter = new InputFilter() {
+            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend){
+                Pattern ps = Pattern.compile("^[a-zA-Z0-9]+$");
+                if(!ps.matcher(source).matches()){
+                    return "";
+                }
+                return null;
+            }
+        };
+
+        // 필터 적용
+        idText.setFilters(new InputFilter[] {filter});
+        pwText.setFilters(new InputFilter[] {filter});
+
+        // 로그인 버튼 리스너
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -35,10 +60,23 @@ public class LoginPage extends Activity {
                         Toast.LENGTH_SHORT).show();
             }
         });
+
+        // 회원가입 버튼 리스너
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                Intent register_intent = new Intent(getApplicationContext(),
+                        RegisterPage.class);
+                startActivity(register_intent);
+            }
+        });
+
+        // DB 동기화를 위한 json 변환과정 <-> php 서버
         JsonParse jsonParse = new JsonParse();
         jsonParse.execute("http://192.168.219.102:80/connect.php");
     }
 
+    // DB 동기화, json 변환 후 읽어오기기
     public class JsonParse extends AsyncTask<String, Void, String> {
         String TAG = "JsonParseTest";
         @Override
@@ -132,5 +170,6 @@ public class LoginPage extends Activity {
             }
             return tmpUserArray;
         } // JSON을 Arraylist에
+
     }
 }

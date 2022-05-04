@@ -20,5 +20,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginPage" android:label="Login Page"/>
+        <activity android:name=".RegisterPage" android:label="Register Page"/>
     </application>
 </manifest>

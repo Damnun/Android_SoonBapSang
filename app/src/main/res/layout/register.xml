@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="37dp"
@@ -23,11 +24,11 @@
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/register_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/register_id"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
@@ -38,10 +39,10 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/register_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/register_password"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_marginBottom="15dp"
@@ -53,10 +54,10 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/register_password_check"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/register_password_check"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_marginBottom="15dp"
@@ -68,11 +69,11 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/register_nickname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/register_nickname"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
@@ -83,11 +84,11 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/register_age"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/register_age"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
@@ -98,19 +99,29 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/register_sex"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/register_sex"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="80dp"
             android:fontFamily="@font/font_two"
             android:hint="성별 (선택 입력)"
             android:singleLine="true"></com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/register_register_button"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#0251A2"
+        android:fontFamily="@font/logo_font"
+        android:text="간편 회원가입" />
 
 
 
