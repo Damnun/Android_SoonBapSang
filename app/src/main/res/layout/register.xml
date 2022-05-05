@@ -67,6 +67,19 @@
             android:inputType="textPassword"></com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/register_name"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="15dp"
+            android:layout_gravity="center"
+            android:fontFamily="@font/font_two"
+            android:hint="이름"
+            android:singleLine="true"></com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
