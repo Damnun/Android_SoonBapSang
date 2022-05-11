@@ -158,11 +158,6 @@ public class LoginPage extends Activity {
                     tmpUser.setNickname(item.getString("닉네임"));
                     tmpUser.setUser_id(item.getString("아이디"));
                     tmpUser.setUser_pw(item.getString("비밀번호"));
-                    tmpUser.setUser_age(item.getInt("나이"));
-                    tmpUser.setUser_mail(item.getString("이메일"));
-                    tmpUser.setUser_register_date("가입일자");
-                    tmpUser.setUser_sex("성별");
-
                     tmpUserArray.add(tmpUser);
                 }
             }catch (JSONException e){
@@ -170,6 +165,5 @@ public class LoginPage extends Activity {
             }
             return tmpUserArray;
         } // JSON을 Arraylist에
-
     }
 }
