@@ -11,6 +11,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.os.AsyncTask;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,8 +28,8 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class LoginPage extends Activity {
-    private String jsonString;
-    ArrayList<User> userArrayList;
+    private Button loginButton, registerButton;
+    private EditText idText, pwText;
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
@@ -37,11 +41,11 @@ public class LoginPage extends Activity {
         EditText pwText = (EditText) findViewById(R.id.login_password);
 
 
-        // 숫자 혹은 영어만 사용하는 필터
+        // 숫자, 영어, 특수문자만 사용하는 필터
         InputFilter filter = new InputFilter() {
-            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend){
+            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
                 Pattern ps = Pattern.compile("^[a-zA-Z0-9]+$");
-                if(!ps.matcher(source).matches()){
+                if (!ps.matcher(source).matches()) {
                     return "";
                 }
                 return null;
@@ -49,121 +53,59 @@ public class LoginPage extends Activity {
         };
 
         // 필터 적용
-        idText.setFilters(new InputFilter[] {filter});
-        pwText.setFilters(new InputFilter[] {filter});
+        idText.setFilters(new InputFilter[]{filter});
 
         // 로그인 버튼 리스너
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "로그인 할게요",
-                        Toast.LENGTH_SHORT).show();
+                String user_id = idText.getText().toString();
+                String user_pw = pwText.getText().toString();
+
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            // For Encoding issue, korean DB can't login
+                            System.out.println("hello" + response);
+                            JSONObject jsonObject = new JSONObject(response);
+                            boolean success = jsonObject.getBoolean("success");
+
+                            if (success) { // 로그인 성공
+                                String user_id = jsonObject.getString("user_id");
+                                String user_pw = jsonObject.getString("user_pw");
+
+                                Toast.makeText(getApplicationContext(), String.format("로그인 되었습니다."), Toast.LENGTH_SHORT).show();
+                                // 로그인 이후 화면 추가 예정
+                                Intent login_intent = new Intent(getApplicationContext(), RegisterPage.class);
+
+                                login_intent.putExtra("user_id", user_id);
+                                login_intent.putExtra("user_pw", user_pw);
+                                startActivity(login_intent);
+
+                            } else { // 로그인 실패
+                                Toast.makeText(getApplicationContext(), "아이디와 비밀번호를 확인하세요.", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                LoginRequest loginRequest = new LoginRequest(user_id, user_pw, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(LoginPage.this);
+                queue.add(loginRequest);
             }
         });
 
         // 회원가입 버튼 리스너
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 Intent register_intent = new Intent(getApplicationContext(),
                         RegisterPage.class);
                 startActivity(register_intent);
             }
         });
-
-        // DB 동기화를 위한 json 변환과정 <-> php 서버
-        JsonParse jsonParse = new JsonParse();
-        jsonParse.execute("http://192.168.219.102:80/connect.php");
-    }
-
-    // DB 동기화, json 변환 후 읽어오기기
-    public class JsonParse extends AsyncTask<String, Void, String> {
-        String TAG = "JsonParseTest";
-        @Override
-        protected String doInBackground(String... strings){
-            String url = strings[0];
-            try{
-                URL serverURL = new URL(url);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) serverURL.openConnection();
-
-                httpURLConnection.setReadTimeout(5000);
-                httpURLConnection.setConnectTimeout(5000);
-                httpURLConnection.connect();
-
-                int responseStatusCode = httpURLConnection.getResponseCode();
-
-                InputStream inputStream;
-                if(responseStatusCode == HttpURLConnection.HTTP_OK){
-                    inputStream = httpURLConnection.getInputStream();
-                }
-                else{
-                    inputStream = httpURLConnection.getErrorStream();
-                }
-
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-                StringBuilder sb = new StringBuilder();
-                String line;
-
-                while((line = bufferedReader.readLine()) != null){
-                    sb.append(line);
-                }
-
-                bufferedReader.close();
-                Log.d(TAG, sb.toString().trim());
-
-                return sb.toString().trim();
-             } catch(Exception e){
-                Log.d(TAG, "InsertData: Error", e);
-                String errorString = e.toString();
-                return null;
-            }
-        }
-
-//        @Override
-//        protected void onPostExecute(String fromdoInBackgroundString) {
-//            super.onPostExecute(fromdoInBackgroundString);
-//
-//            if(fromdoInBackgroundString == null)
-//                System.out.println("error");
-//            else {
-//                jsonString = fromdoInBackgroundString;
-//                userArrayList = doParse();
-//                Log.d(TAG, userArrayList.get(0).getName());
-//                System.out.println(userArrayList.get(0).getName());
-//            }
-//        }
-
-        @Override
-        protected void onPreExecute(){
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values){
-            super.onProgressUpdate(values);
-        }
-
-        private ArrayList<User> doParse(){
-            ArrayList<User> tmpUserArray = new ArrayList<User>();
-            try{
-                JSONObject jsonObject = new JSONObject(jsonString);
-                JSONArray jsonArray = jsonObject.getJSONArray("User");
-
-                for(int i = 0; i < jsonArray.length(); i++){
-                    User tmpUser = new User();
-                    JSONObject item = jsonArray.getJSONObject(i);
-                    tmpUser.setName(item.getString("이름"));
-                    tmpUser.setNickname(item.getString("닉네임"));
-                    tmpUser.setUser_id(item.getString("아이디"));
-                    tmpUser.setUser_pw(item.getString("비밀번호"));
-                    tmpUserArray.add(tmpUser);
-                }
-            }catch (JSONException e){
-                e.printStackTrace();
-            }
-            return tmpUserArray;
-        } // JSON을 Arraylist에
     }
 }

@@ -11,10 +11,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class RegisterPHPRequest {
+public class RegisterRequest {
     private URL url;
 
-    public RegisterPHPRequest(String url) throws MalformedURLException { this.url = new URL(url); }
+    public RegisterRequest(String url) throws MalformedURLException { this.url = new URL(url); }
 
     private String readStream(InputStream in) throws IOException {
         StringBuilder jsonHtml = new StringBuilder();
