@@ -20,7 +20,6 @@ import org.json.JSONObject;
 public class RegisterPage extends AppCompatActivity {
     EditText register_id, register_name, register_password, register_password_check, register_nickname, register_age, register_sex;
     Button register_button, register_id_check_button;
-    private AlertDialog dialog;
     private boolean validate = false; // 아이디 중복 체크
 
 
