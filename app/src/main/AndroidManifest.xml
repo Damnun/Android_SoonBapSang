@@ -29,6 +29,6 @@
         // activity 리스트
         <activity android:name=".LoginPage" android:label="Login Page"/>
         <activity android:name=".RegisterPage" android:label="Register Page"/>
-
+        <activity android:name=".Map" android:label="Map Page"/>
     </application>
 </manifest>
