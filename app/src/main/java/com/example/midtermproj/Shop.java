@@ -7,7 +7,25 @@ public class Shop {
     String latitude;
     String longitude;
     String field;
-    int likes;
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getLikes() {
+        return likes;
+    }
+
+    public void setLikes(String likes) {
+        this.likes = likes;
+    }
+
+    String number;
+    String likes;
 
     public String getField() {
         return field;
@@ -33,13 +51,6 @@ public class Shop {
         this.description = description;
     }
 
-    public int getLikes() {
-        return likes;
-    }
-
-    public void setLikes(int likes) {
-        this.likes = likes;
-    }
 
     public String getImage() {
         return image;
