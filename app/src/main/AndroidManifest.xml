@@ -3,7 +3,7 @@
     package="com.example.midtermproj">
 
     // google maps 사용을 위한 권한 부여여
-   <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
@@ -19,7 +19,7 @@
         // google maps api 사용을 위한 API_KEY 지정
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="-" />
+            android:value="AIzaSyDvoK4Eok7O4V-jLv0iDfC0d_oSt-TRXsI" />
 
         // activity intent 활성화
         <activity
@@ -35,5 +35,9 @@
         <activity android:name=".LoginPage" android:label="Login Page"/>
         <activity android:name=".RegisterPage" android:label="Register Page"/>
         <activity android:name=".Map" android:label="Map Page"/>
+        <activity android:name=".SelectMain" android:label="Main Select Page"/>
+        <activity android:name=".ShopList" android:label="Shop List Page" />
+        <activity android:name=".ShopMain" android:label="Shop Mainj Page"/>
+        <activity android:name=".Test" android:label="Test Page"/>
     </application>
 </manifest>

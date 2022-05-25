@@ -30,7 +30,7 @@
             android:layout_height="150dp"
             android:layout_margin="35dp"
             android:layout_gravity="center"
-            android:text="가게 반찬 포장" />
+            android:text="developer testing" />
 
         <Button
             android:id="@+id/select_market_button"
@@ -38,7 +38,7 @@
             android:layout_height="150dp"
             android:layout_margin="15dp"
             android:layout_gravity="center"
-            android:text="반찬 장터" />
+            android:text="가게 반찬 포장" />
 
     </LinearLayout>
 

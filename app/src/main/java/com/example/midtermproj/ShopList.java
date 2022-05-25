@@ -1,16 +1,18 @@
 package com.example.midtermproj;
-import android.app.Activity;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,26 +23,38 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Array;
 import java.util.ArrayList;
 
 public class ShopList extends AppCompatActivity {
-    private TextView textView, textView2, textView3;
+    //    private TextView textView, textView2, textView3;
     private String jsonString;
-    ArrayList<Shop> shopArrayList;
+    private ArrayList<Shop> shopArrayList;
+    private ShopAdapter mAdapter;
+    private RecyclerView mRecyclerView;
+    private TextView mTextViewResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shop_list);
 
-        textView = (TextView) findViewById(R.id.shop_name);
-        textView2 = (TextView) findViewById(R.id.shop_description);
-        textView3 = (TextView) findViewById(R.id.shop_field);
+//        textView = (TextView) findViewById(R.id.shop_name);
+//        textView2 = (TextView) findViewById(R.id.shop_description);
+//        textView3 = (TextView) findViewById(R.id.shop_field);
+
+        mTextViewResult = (TextView) findViewById(R.id.textView_main_result);
+        mRecyclerView = (RecyclerView) findViewById(R.id.listView_main_list);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter = new ShopAdapter(this, shopArrayList);
+        mRecyclerView.setAdapter(mAdapter);
 
         JsonParse jsonParse = new JsonParse();
         jsonParse.execute("http://sch20185119.dothome.co.kr/getshop.php");
+
+        mTextViewResult.setMovementMethod(new ScrollingMovementMethod());
+        mAdapter.notifyDataSetChanged();
     }
+
 
     public class JsonParse extends AsyncTask<String, Void, String> {
         String TAG = "JsonParseTest";
@@ -91,14 +105,18 @@ public class ShopList extends AppCompatActivity {
             super.onPostExecute(fromdoInBackgroundString);
 
             if(fromdoInBackgroundString == null)
-                textView.setText("error");
+                Toast.makeText(getApplicationContext(), "DB Error.", Toast.LENGTH_SHORT).show();
+//                textView.setText("error");
             else {
                 jsonString = fromdoInBackgroundString;
                 shopArrayList = doParse();
+                mTextViewResult.setText(jsonString);
+                mAdapter.notifyDataSetChanged();
+
                 Log.d(TAG, shopArrayList.get(0).getName());
-                textView.setText(shopArrayList.get(0).getName());
-                textView2.setText(shopArrayList.get(0).getDescription());
-                textView3.setText(shopArrayList.get(0).getField());
+//                textView.setText(shopArrayList.get(0).getName());
+//                textView2.setText(shopArrayList.get(0).getDescription());
+//                textView3.setText(shopArrayList.get(0).getField());
             }
         }
 
@@ -130,9 +148,12 @@ public class ShopList extends AppCompatActivity {
                     tmpShop.setLongitude(item.getString("shop_location_longitude"));
                     tmpShop.setField(item.getString("shop_field"));
                     tmpShopArray.add(tmpShop);
+
+                    mAdapter.notifyDataSetChanged();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+                Log.d(TAG, "showResult : ", e);
             }
             return tmpShopArray;
         }

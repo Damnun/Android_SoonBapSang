@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
 
@@ -23,15 +22,15 @@ public class SelectMain extends Activity {
         marketButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent market_intent = new Intent(getApplicationContext(), Map.class);
-                startActivity(market_intent);
+                Intent temp_intent = new Intent(getApplicationContext(), ShopList.class);
+                startActivity(temp_intent);
             }
         });
 
         takeoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent takeout_intent = new Intent(getApplicationContext(), ShopList.class);
+                Intent takeout_intent = new Intent(getApplicationContext(), ShopMain.class);
                 startActivity(takeout_intent);
             }
         });
