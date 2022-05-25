@@ -3,6 +3,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -26,7 +27,6 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class ShopList extends AppCompatActivity {
-    //    private TextView textView, textView2, textView3;
     private String jsonString;
     private ArrayList<Shop> shopArrayList;
     private ShopAdapter mAdapter;
@@ -38,25 +38,27 @@ public class ShopList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shop_list);
 
-//        textView = (TextView) findViewById(R.id.shop_name);
-//        textView2 = (TextView) findViewById(R.id.shop_description);
-//        textView3 = (TextView) findViewById(R.id.shop_field);
-
         mTextViewResult = (TextView) findViewById(R.id.textView_main_result);
         mRecyclerView = (RecyclerView) findViewById(R.id.listView_main_list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mTextViewResult.setMovementMethod(new ScrollingMovementMethod());
+
+        shopArrayList = new ArrayList<>();
         mAdapter = new ShopAdapter(this, shopArrayList);
         mRecyclerView.setAdapter(mAdapter);
 
+        shopArrayList.clear();
+        mAdapter.notifyDataSetChanged();
+        
         JsonParse jsonParse = new JsonParse();
         jsonParse.execute("http://sch20185119.dothome.co.kr/getshop.php");
 
-        mTextViewResult.setMovementMethod(new ScrollingMovementMethod());
-        mAdapter.notifyDataSetChanged();
+        
     }
 
 
     public class JsonParse extends AsyncTask<String, Void, String> {
+        ProgressDialog progressDialog;
         String TAG = "JsonParseTest";
 
         @Override
@@ -101,37 +103,34 @@ public class ShopList extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String fromdoInBackgroundString) {
-            super.onPostExecute(fromdoInBackgroundString);
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(ShopList.this, "Please Wait", null, true, true);
+        }
+        
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
 
-            if(fromdoInBackgroundString == null)
+            progressDialog.dismiss();
+            mTextViewResult.setText(result);
+            Log.d(TAG, "response - " + result);
+
+            if(result == null)
                 Toast.makeText(getApplicationContext(), "DB Error.", Toast.LENGTH_SHORT).show();
-//                textView.setText("error");
             else {
-                jsonString = fromdoInBackgroundString;
-                shopArrayList = doParse();
-                mTextViewResult.setText(jsonString);
-                mAdapter.notifyDataSetChanged();
-
-                Log.d(TAG, shopArrayList.get(0).getName());
-//                textView.setText(shopArrayList.get(0).getName());
-//                textView2.setText(shopArrayList.get(0).getDescription());
-//                textView3.setText(shopArrayList.get(0).getField());
+                jsonString = result;
+                showResult();
             }
         }
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
 
         @Override
         protected void onProgressUpdate(Void... values) {
             super.onProgressUpdate(values);
         }
 
-        private ArrayList<Shop> doParse() {
-            ArrayList<Shop> tmpShopArray = new ArrayList<Shop>();
+        private void showResult() {
             try {
                 JSONObject jsonObject = new JSONObject(jsonString);
                 JSONArray jsonArray = jsonObject.getJSONArray("webnautes");
@@ -147,15 +146,14 @@ public class ShopList extends AppCompatActivity {
                     tmpShop.setLatitude(item.getString("shop_location_latitude"));
                     tmpShop.setLongitude(item.getString("shop_location_longitude"));
                     tmpShop.setField(item.getString("shop_field"));
-                    tmpShopArray.add(tmpShop);
 
+                    shopArrayList.add(tmpShop);
                     mAdapter.notifyDataSetChanged();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
                 Log.d(TAG, "showResult : ", e);
             }
-            return tmpShopArray;
         }
     }
 }
