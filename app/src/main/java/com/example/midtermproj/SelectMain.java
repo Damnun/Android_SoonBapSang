@@ -19,20 +19,24 @@ public class SelectMain extends Activity {
         Button marketButton = (Button) findViewById(R.id.select_market_button);
         Button takeoutButton = (Button) findViewById(R.id.select_takeout_button);
 
+
+        takeoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("left button selected");
+                Intent takeout_intent = new Intent(getApplicationContext(), ShopMain.class);
+                startActivity(takeout_intent);
+            }
+        });
+
         marketButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.println("right button selected");
                 Intent temp_intent = new Intent(getApplicationContext(), ShopList.class);
                 startActivity(temp_intent);
             }
         });
 
-        takeoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent takeout_intent = new Intent(getApplicationContext(), ShopMain.class);
-                startActivity(takeout_intent);
-            }
-        });
     }
 }

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudio/AndroidProj/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1605" />
         <entry key="..\:/AndroidStudio/AndroidProj/app/src/main/res/drawable/ic_arrow_drop_down_circle_black_24dp.xml" value="0.246" />
         <entry key="..\:/AndroidStudio/AndroidProj/app/src/main/res/drawable/ic_dehaze_black_24dp.xml" value="0.246" />
         <entry key="..\:/AndroidStudio/AndroidProj/app/src/main/res/drawable/ic_remove_from_queue_black_24dp.xml" value="0.246" />
@@ -15,8 +16,11 @@
         <entry key="..\:/AndroidStudio/AndroidProj/app/src/main/res/layout/shop_items.xml" value="0.36614583333333334" />
         <entry key="..\:/AndroidStudio/AndroidProj/app/src/main/res/layout/shop_list.xml" value="0.33" />
         <entry key="..\:/AndroidStudio/AndroidProj/app/src/main/res/layout/shop_main.xml" value="0.1" />
+        <entry key="..\:/AndroidStudio/AndroidProj/app/src/main/res/layout/shop_selected.xml" value="0.29393115942028986" />
         <entry key="..\:/AndroidStudio/AndroidProj/app/src/main/res/layout/side_shop.xml" value="0.36614583333333334" />
         <entry key="..\:/AndroidStudio/AndroidProj/app/src/main/res/layout/style.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidStudio/AndroidProj/app/src/main/res/layout/testXML" value="0.23731884057971014" />
+        <entry key="..\:/AndroidStudio/AndroidProj/app/src/main/res/layout/testXML.xml" value="0.23731884057971014" />
       </map>
     </option>
   </component>

@@ -40,13 +40,23 @@ public class ShopList extends AppCompatActivity {
 
         mTextViewResult = (TextView) findViewById(R.id.textView_main_result);
         mRecyclerView = (RecyclerView) findViewById(R.id.listView_main_list);
+        mRecyclerView.setHasFixedSize(true); // recyclerview upgrade
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mTextViewResult.setMovementMethod(new ScrollingMovementMethod());
 
         shopArrayList = new ArrayList<>();
         mAdapter = new ShopAdapter(this, shopArrayList);
-        mRecyclerView.setAdapter(mAdapter);
 
+        mAdapter.setOnItemClickListener(new ShopAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClicked(int position, View view) {
+                Shop item = mAdapter.getItem(position);
+                Toast.makeText(getApplicationContext(), "Position:" + position + ", Data: "
+                        +item.getName() , Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        mRecyclerView.setAdapter(mAdapter);
         shopArrayList.clear();
         mAdapter.notifyDataSetChanged();
         
