@@ -14,31 +14,5 @@
         android:layout_height="600dp"
         tools:context=".MapsActivity" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/map_takeout_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:fontFamily="@font/font_two"
-            android:backgroundTint="#69F4FF"
-            android:text="반찬 포장"/>
-
-        <Button
-            android:id="@+id/map_market_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:fontFamily="@font/font_two"
-            android:backgroundTint="#69F4FF"
-            android:text="반찬 장터"/>
-
-    </LinearLayout>
 
 </LinearLayout>

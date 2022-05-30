@@ -122,6 +122,7 @@ public class ShopList extends AppCompatActivity {
                 detail_intent.putExtra("shop_image", item.getImage());
                 detail_intent.putExtra("shop_call", item.getLatitude());
                 detail_intent.putExtra("shop_location", item.getLongitude());
+                detail_intent.putExtra("shop_No", item.getNumber());
                 startActivity(detail_intent);
             }
         });
@@ -191,7 +192,7 @@ public class ShopList extends AppCompatActivity {
             super.onPreExecute();
             progressDialog = ProgressDialog.show(ShopList.this, "Please Wait", null, true, true);
         }
-        
+
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
