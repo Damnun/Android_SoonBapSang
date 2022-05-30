@@ -16,51 +16,48 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/text1"
+                android:id="@+id/list_korea_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:fontFamily="@font/font_two"
                 android:text="한식"
                 android:textSize="18dp" />
 
             <Button
-                android:id="@+id/text2"
+                android:id="@+id/list_china_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:layout_marginBottom="0dp"
+                android:fontFamily="@font/font_two"
                 android:text="중식"
                 android:textSize="18dp" />
 
             <Button
-                android:id="@+id/text3"
+                android:id="@+id/list_japan_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="중식"
+                android:fontFamily="@font/font_two"
+                android:text="일식"
                 android:textSize="18dp" />
 
-            <Button
-                android:id="@+id/text4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="돈까스ㆍ일식"
-                android:textSize="18dp" />
 
             <Button
-                android:id="@+id/text5"
+                android:id="@+id/list_fastfood_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:fontFamily="@font/font_two"
                 android:text="치킨ㆍ피자"
                 android:textSize="18dp" />
 
             <Button
-                android:id="@+id/text6"
+                android:id="@+id/list_bunsik_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:fontFamily="@font/font_two"
                 android:text="분식"
                 android:textSize="18dp" />
 

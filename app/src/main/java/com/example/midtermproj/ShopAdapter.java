@@ -1,19 +1,24 @@
 package com.example.midtermproj;
 
 import android.app.Activity;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.CustomViewHolder> {
 
+    private String imageStr = "";
     private ArrayList<Shop> mList = null;
     private Activity context = null;
 
@@ -34,17 +39,19 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.CustomViewHold
 
 
     class CustomViewHolder extends RecyclerView.ViewHolder {
+        protected ImageView picture;
         protected TextView name;
         protected TextView likes;
-        protected TextView images;
+        protected TextView description;
 
         public CustomViewHolder(View view) {
             super(view);
+            this.picture = (ImageView) view.findViewById(R.id.shop_list_item_image);
             this.name = (TextView) view.findViewById(R.id.shop_list_name);
             this.likes = (TextView) view.findViewById(R.id.shop_list_likes);
-            this.images = (TextView) view.findViewById(R.id.shop_list_lmages);
-
+            this.description = (TextView) view.findViewById(R.id.shop_list_description);
         }
+
 
     }
 
@@ -69,11 +76,13 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.CustomViewHold
 
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder viewholder, int position) {
-
         viewholder.name.setText(mList.get(position).getName());
         viewholder.likes.setText(mList.get(position).getLikes());
-        viewholder.images.setText(mList.get(position).getImage());
-
+        viewholder.description.setText(mList.get(position).getDescription());
+        imageStr = mList.get(position).getImage().toString();
+        Glide.with(context)
+                .load(imageStr)
+                .into(viewholder.picture);
     }
 
     @Override

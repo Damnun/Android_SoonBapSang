@@ -1,5 +1,6 @@
 package com.example.midtermproj;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +11,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,11 +34,18 @@ public class ShopList extends AppCompatActivity {
     private ShopAdapter mAdapter;
     private RecyclerView mRecyclerView;
     private TextView mTextViewResult;
+    private Button koreaButton, chinaButton, japanButton, fastfoodButton, bunsikButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shop_list);
+
+        koreaButton = (Button) findViewById(R.id.list_korea_button);
+        chinaButton = (Button) findViewById(R.id.list_china_button);
+        japanButton = (Button) findViewById(R.id.list_japan_button);
+        fastfoodButton = (Button) findViewById(R.id.list_fastfood_button);
+        bunsikButton = (Button) findViewById(R.id.list_bunsik_button);
 
         mTextViewResult = (TextView) findViewById(R.id.textView_main_result);
         mRecyclerView = (RecyclerView) findViewById(R.id.listView_main_list);
@@ -46,7 +55,6 @@ public class ShopList extends AppCompatActivity {
 
         shopArrayList = new ArrayList<>();
         mAdapter = new ShopAdapter(this, shopArrayList);
-
         mAdapter.setOnItemClickListener(new ShopAdapter.OnItemClickListener() {
             @Override
             public void onItemClicked(int position, View view) {
@@ -56,13 +64,17 @@ public class ShopList extends AppCompatActivity {
             }
         });
 
+        // Item 마다 구분선 추가
+        DividerItemDecoration dividerItemDecoration =
+                new DividerItemDecoration(getApplicationContext(), new LinearLayoutManager(this).getOrientation());
+        mRecyclerView.addItemDecoration(dividerItemDecoration);
+
         mRecyclerView.setAdapter(mAdapter);
         shopArrayList.clear();
         mAdapter.notifyDataSetChanged();
         
         JsonParse jsonParse = new JsonParse();
         jsonParse.execute("http://sch20185119.dothome.co.kr/getshop.php");
-
         
     }
 
