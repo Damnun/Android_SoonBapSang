@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -29,7 +30,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class ShopList extends AppCompatActivity {
-    private String jsonString;
+    private String jsonString, selectedField;
     private ArrayList<Shop> shopArrayList;
     private ShopAdapter mAdapter;
     private RecyclerView mRecyclerView;
@@ -42,10 +43,64 @@ public class ShopList extends AppCompatActivity {
         setContentView(R.layout.shop_list);
 
         koreaButton = (Button) findViewById(R.id.list_korea_button);
+        koreaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shopArrayList.clear();
+                selectedField = "korea";
+                JsonParse jsonParse = new JsonParse();
+                jsonParse.execute("http://sch20185119.dothome.co.kr/getshop.php");
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+
         chinaButton = (Button) findViewById(R.id.list_china_button);
+        chinaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shopArrayList.clear();
+                selectedField = "china";
+                JsonParse jsonParse = new JsonParse();
+                jsonParse.execute("http://sch20185119.dothome.co.kr/getshop.php");
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+
         japanButton = (Button) findViewById(R.id.list_japan_button);
+        japanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shopArrayList.clear();
+                selectedField = "japan";
+                JsonParse jsonParse = new JsonParse();
+                jsonParse.execute("http://sch20185119.dothome.co.kr/getshop.php");
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+
         fastfoodButton = (Button) findViewById(R.id.list_fastfood_button);
+        fastfoodButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shopArrayList.clear();
+                selectedField = "fastfood";
+                JsonParse jsonParse = new JsonParse();
+                jsonParse.execute("http://sch20185119.dothome.co.kr/getshop.php");
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+
         bunsikButton = (Button) findViewById(R.id.list_bunsik_button);
+        bunsikButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shopArrayList.clear();
+                selectedField = "bunsik";
+                JsonParse jsonParse = new JsonParse();
+                jsonParse.execute("http://sch20185119.dothome.co.kr/getshop.php");
+                mAdapter.notifyDataSetChanged();
+            }
+        });
 
         mTextViewResult = (TextView) findViewById(R.id.textView_main_result);
         mRecyclerView = (RecyclerView) findViewById(R.id.listView_main_list);
@@ -61,6 +116,13 @@ public class ShopList extends AppCompatActivity {
                 Shop item = mAdapter.getItem(position);
                 Toast.makeText(getApplicationContext(), "Position:" + position + ", Data: "
                         +item.getName() , Toast.LENGTH_SHORT).show();
+                Intent detail_intent = new Intent(getApplicationContext(),
+                        ShopDetail.class);
+                detail_intent.putExtra("shop_name", item.getName());
+                detail_intent.putExtra("shop_image", item.getImage());
+                detail_intent.putExtra("shop_call", item.getLatitude());
+                detail_intent.putExtra("shop_location", item.getLongitude());
+                startActivity(detail_intent);
             }
         });
 
@@ -169,7 +231,8 @@ public class ShopList extends AppCompatActivity {
                     tmpShop.setLongitude(item.getString("shop_location_longitude"));
                     tmpShop.setField(item.getString("shop_field"));
 
-                    shopArrayList.add(tmpShop);
+                    if (tmpShop.getField().equals(selectedField) || selectedField == null)
+                        shopArrayList.add(tmpShop);
                     mAdapter.notifyDataSetChanged();
                 }
             } catch (JSONException e) {
