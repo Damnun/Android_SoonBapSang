@@ -1,6 +1,11 @@
 package com.example.midtermproj;
 
-public class Menu {
+import java.io.Serializable;
+
+public class Menu implements Serializable {
+    // ArayList 일렬화를 하지 않으면 오류 발생 implements
+    private static final long serialVersionUID = 1L;
+
     String menuNumber, shopNumber, description, image, name, price;
 
     public String getMenuNumber() {

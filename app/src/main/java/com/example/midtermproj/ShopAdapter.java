@@ -80,7 +80,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.CustomViewHold
         viewholder.likes.setText(mList.get(position).getLikes());
         viewholder.description.setText(mList.get(position).getDescription());
         imageStr = mList.get(position).getImage().toString();
-        Glide.with(context)
+        Glide.with(context) 
                 .load(imageStr)
                 .into(viewholder.picture);
     }

@@ -26,17 +26,21 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ShopDetail extends AppCompatActivity {
+
     private String jsonString, shop_name, correctNo;
     private ArrayList<Menu> menuArrayList;
+    private ArrayList<Menu> menuBasketArrayList;
     private MenuAdapter mAdapter;
     private RecyclerView mRecyclerView;
     private ImageView shopImage;
-    private Button callButton, addressButton;
+    private Button callButton, addressButton, basketButton;
     private TextView name, text;
 
     @Override
@@ -48,6 +52,7 @@ public class ShopDetail extends AppCompatActivity {
         shopImage = (ImageView) findViewById(R.id.detail_image);
         callButton = (Button) findViewById(R.id.detail_call);
         addressButton = (Button) findViewById(R.id.detail_address);
+        basketButton = (Button) findViewById(R.id.basket_button);
         name = (TextView) findViewById(R.id.detail_name);
         text = (TextView) findViewById(R.id.detail_text);
 
@@ -77,18 +82,42 @@ public class ShopDetail extends AppCompatActivity {
             }
         });
 
+        basketButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (menuBasketArrayList.isEmpty())
+                    Toast.makeText(getApplicationContext(), "장바구니가 비어있습니다.", Toast.LENGTH_SHORT).show();
+                else{
+                    Intent basket_intent = new Intent(getApplicationContext(), ShopBasket.class);
+                    basket_intent.putExtra("basketItem", menuBasketArrayList);
+                    startActivity(basket_intent);
+                }
+            }
+        });
+
         mRecyclerView = (RecyclerView) findViewById(R.id.listView_menu_list);
         mRecyclerView.setHasFixedSize(true); // recyclerview upgrade
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         menuArrayList = new ArrayList<>();
+        menuBasketArrayList = new ArrayList<>();
+
+
         mAdapter = new MenuAdapter(this, menuArrayList);
         mAdapter.setOnItemClickListener(new MenuAdapter.OnItemClickListener() {
             @Override
             public void onItemClicked(int position, View view) {
                 Menu item = mAdapter.getItem(position);
-                Toast.makeText(getApplicationContext(), "Position:" + position + ", Data: "
+                Toast.makeText(getApplicationContext(), "MenuNumber:" + item.getMenuNumber() + ", Data: "
                         + item.getName(), Toast.LENGTH_SHORT).show();
+
+
+                if (menuBasketArrayList.contains(item))
+                    Toast.makeText(getApplicationContext(), "이미 장바구니에 있는 상품입니다.", Toast.LENGTH_SHORT).show();
+                else
+                    menuBasketArrayList.add(item);
+                basketButton.setText("장바구니(" + menuBasketArrayList.size() +")");
+                System.out.println(menuBasketArrayList);
             }
         });
 
@@ -105,6 +134,7 @@ public class ShopDetail extends AppCompatActivity {
         jsonParse.execute("http://sch20185119.dothome.co.kr/getmenu.php");
 
     }
+
 
 
         public class JsonParse extends AsyncTask<String, Void, String> {

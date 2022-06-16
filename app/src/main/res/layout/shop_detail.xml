@@ -44,6 +44,14 @@
             android:fontFamily="@font/font_one"
             android:text="주소"/>
 
+        <Button
+            android:id="@+id/basket_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_one"
+            android:text="장바구니"/>
+
+
     </LinearLayout>
 
     <TextView

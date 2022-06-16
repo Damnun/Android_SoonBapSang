@@ -39,6 +39,7 @@
         <activity android:name=".ShopList" android:label="Shop List Page" />
         <activity android:name=".ShopMain" android:label="Shop Main Page"/>
         <activity android:name=".Test" android:label="Test Page"/>
-        <activity android:name=".ShopDetail" android:label="Shop Detail page"/>
+        <activity android:name=".ShopDetail" android:label="Shop Detail Page"/>
+        <activity android:name=".ShopBasket" android:label="Shop Basket Page"/>
     </application>
 </manifest>
