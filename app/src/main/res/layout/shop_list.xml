@@ -79,21 +79,22 @@
         android:id="@+id/listView_main_list" />
 
 
-    <!--- 디버깅 용 -->
-    <TextView
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="5dp"
-        android:text="디버깅 용"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView_main_debug" />
+<!--    - 디버깅 용-->
+<!--    <TextView-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:text="디버깅 용"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/textView_main_debug" />-->
 
-    <TextView
-        android:layout_margin="5dp"
-        android:id="@+id/textView_main_result"
-        android:scrollbars = "vertical"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.5" />
+<!--    <TextView-->
+<!--        android:layout_margin="5dp"-->
+<!--        android:enabled="false"-->
+<!--        android:id="@+id/textView_main_result"-->
+<!--        android:scrollbars = "vertical"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_weight="1.5" />-->
 
 </LinearLayout>

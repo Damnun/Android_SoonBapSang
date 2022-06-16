@@ -77,8 +77,7 @@ public class LoginPage extends Activity {
 
                                 Toast.makeText(getApplicationContext(), String.format("로그인 되었습니다."), Toast.LENGTH_SHORT).show();
                                 // 로그인 이후 화면 추가 예정
-                                Intent login_intent = new Intent(getApplicationContext(), SelectMain.class);
-
+                                Intent login_intent = new Intent(getApplicationContext(), ShopList.class);
                                 login_intent.putExtra("user_id", user_id);
                                 login_intent.putExtra("user_pw", user_pw);
                                 startActivity(login_intent);

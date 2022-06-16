@@ -6,7 +6,8 @@ public class Menu implements Serializable {
     // ArayList 일렬화를 하지 않으면 오류 발생 implements
     private static final long serialVersionUID = 1L;
 
-    String menuNumber, shopNumber, description, image, name, price;
+    String menuNumber, shopNumber, description, image, name;
+    int price;
 
     public String getMenuNumber() {
         return menuNumber;
@@ -48,11 +49,11 @@ public class Menu implements Serializable {
         this.name = name;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

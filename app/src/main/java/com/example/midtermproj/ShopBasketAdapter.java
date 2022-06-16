@@ -6,33 +6,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
-public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.CustomViewHolder> {
+public class ShopBasketAdapter extends RecyclerView.Adapter<ShopBasketAdapter.CustomViewHolder> {
 
     private String imageStr = "";
     private ArrayList<Menu> mList = null;
     private Activity context = null;
 
-    public interface OnItemClickListener {
-        void onItemClicked(int position, View view);
-    }
 
-    private OnItemClickListener itemClickListener;
-
-    public void setOnItemClickListener (OnItemClickListener listener) {
-        itemClickListener = listener;
-    }
-
-    public MenuAdapter(Activity context, ArrayList<Menu> list) {
+    public ShopBasketAdapter(Activity context, ArrayList<Menu> list) {
         this.context = context;
         this.mList = list;
     }
@@ -42,14 +37,14 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.CustomViewHold
         protected ImageView picture;
         protected TextView name;
         protected TextView price;
-        protected TextView description;
+//        protected Button delete;
 
         public CustomViewHolder(View view) {
             super(view);
-            this.picture = (ImageView) view.findViewById(R.id.menu_list_item_image);
-            this.name = (TextView) view.findViewById(R.id.menu_list_name);
-            this.price = (TextView) view.findViewById(R.id.menu_list_price);
-            this.description = (TextView) view.findViewById(R.id.menu_list_description);
+            this.picture = (ImageView) view.findViewById(R.id.basket_list_item_image);
+            this.name = (TextView) view.findViewById(R.id.basket_list_name);
+            this.price = (TextView) view.findViewById(R.id.basket_list_price);
+//            this.delete = (Button) view.findViewById(R.id.basket_list_button);
         }
 
 
@@ -58,19 +53,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.CustomViewHold
 
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.menu_items, null);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.basket_items, null);
         CustomViewHolder viewHolder = new CustomViewHolder(view);
-
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int position = viewHolder.getAdapterPosition();
-                if (position != RecyclerView.NO_POSITION) {
-                    itemClickListener.onItemClicked(position, view);
-                }
-            }
-        });
-
         return viewHolder;
     }
 
@@ -78,7 +62,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.CustomViewHold
     public void onBindViewHolder(@NonNull CustomViewHolder viewholder, int position) {
         viewholder.name.setText(mList.get(position).getName());
         viewholder.price.setText(Integer.toString(mList.get(position).getPrice()) + "원");
-        viewholder.description.setText(mList.get(position).getDescription());
         imageStr = mList.get(position).getImage().toString();
         Glide.with(context)
                 .load(imageStr)

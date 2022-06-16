@@ -89,6 +89,7 @@ public class ShopDetail extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "장바구니가 비어있습니다.", Toast.LENGTH_SHORT).show();
                 else{
                     Intent basket_intent = new Intent(getApplicationContext(), ShopBasket.class);
+                    basket_intent.putExtra("basketName", shop_name);
                     basket_intent.putExtra("basketItem", menuBasketArrayList);
                     startActivity(basket_intent);
                 }
@@ -221,7 +222,7 @@ public class ShopDetail extends AppCompatActivity {
                         tmpMenu.setName(item.getString("menu_name"));
                         tmpMenu.setDescription(item.getString("menu_description"));
                         tmpMenu.setImage(item.getString("menu_image"));
-                        tmpMenu.setPrice(item.getString("menu_price"));
+                        tmpMenu.setPrice(item.getInt("menu_price"));
                         tmpMenu.setShopNumber(item.getString("shop_No"));
 
                         // 해당 가게의 메뉴만 리스트에 넣어줌

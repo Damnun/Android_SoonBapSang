@@ -1,31 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/login_logo"
-        android:layout_width="180dp"
-        android:layout_height="160dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="200dp"
-        android:layout_marginBottom="0dp"
-        android:src="@drawable/logo_image" />
 
     <TextView
-        android:id="@+id/login_logo_text"
+        android:id="@+id/basket_shop_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="가게이름"
+        android:layout_margin="30dp"
+        android:layout_gravity="center"
+        android:fontFamily="@font/logo_font"
+        android:textSize="25dp"
+        android:textStyle="bold"/>
+
+
+    <View
+        android:background="@color/black"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_height="2px" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:id="@+id/listView_basket_list" />
+
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="순밥상"
-        android:fontFamily="@font/logo_font"
-        android:textSize="30dp"
-        android:letterSpacing="0.1"
-        android:layout_marginBottom="35dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:id="@+id/basket_go"
+        android:text="배달 주문하기"
+        android:layout_gravity="center"
+        android:fontFamily="@font/font_one"/>
+
+
+
 
 </LinearLayout>

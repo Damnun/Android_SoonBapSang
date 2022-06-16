@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
@@ -34,9 +35,8 @@ public class ShopList extends AppCompatActivity {
     private ArrayList<Shop> shopArrayList;
     private ShopAdapter mAdapter;
     private RecyclerView mRecyclerView;
-    private TextView mTextViewResult;
+//    private TextView mTextViewResult;
     private Button koreaButton, chinaButton, japanButton, fastfoodButton, bunsikButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,11 +102,11 @@ public class ShopList extends AppCompatActivity {
             }
         });
 
-        mTextViewResult = (TextView) findViewById(R.id.textView_main_result);
+//        mTextViewResult = (TextView) findViewById(R.id.textView_main_result);
         mRecyclerView = (RecyclerView) findViewById(R.id.listView_main_list);
         mRecyclerView.setHasFixedSize(true); // recyclerview upgrade
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mTextViewResult.setMovementMethod(new ScrollingMovementMethod());
+//        mTextViewResult.setMovementMethod(new ScrollingMovementMethod());
 
         shopArrayList = new ArrayList<>();
         mAdapter = new ShopAdapter(this, shopArrayList);
@@ -138,6 +138,7 @@ public class ShopList extends AppCompatActivity {
         
         JsonParse jsonParse = new JsonParse();
         jsonParse.execute("http://sch20185119.dothome.co.kr/getshop.php");
+//        mTextViewResult.setEnabled(false);
         
     }
 
@@ -198,7 +199,7 @@ public class ShopList extends AppCompatActivity {
             super.onPostExecute(result);
 
             progressDialog.dismiss();
-            mTextViewResult.setText(result);
+//            mTextViewResult.setText(result);
             Log.d(TAG, "response - " + result);
 
             if(result == null)
