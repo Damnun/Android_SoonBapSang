@@ -1,20 +1,21 @@
-package com.example.midtermproj;
 
-import android.util.Log;
+        package com.example.midtermproj;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+        import android.util.Log;
 
-public class RegisterRequest {
+        import java.io.BufferedReader;
+        import java.io.IOException;
+        import java.io.InputStream;
+        import java.io.InputStreamReader;
+        import java.io.OutputStream;
+        import java.net.HttpURLConnection;
+        import java.net.MalformedURLException;
+        import java.net.URL;
+
+public class RegisterPHPRequest {
     private URL url;
 
-    public RegisterRequest(String url) throws MalformedURLException { this.url = new URL(url); }
+    public RegisterPHPRequest(String url) throws MalformedURLException { this.url = new URL(url); }
 
     private String readStream(InputStream in) throws IOException {
         StringBuilder jsonHtml = new StringBuilder();
@@ -45,7 +46,7 @@ public class RegisterRequest {
             return result;
         } catch (Exception e) {
             Log.i("PHPRequest", "request was failed.");
-            return "1";
+            return null;
         }
     }
 }

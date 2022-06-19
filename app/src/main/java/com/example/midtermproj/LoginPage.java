@@ -83,7 +83,11 @@ public class LoginPage extends Activity {
                                 startActivity(login_intent);
 
                             } else { // 로그인 실패
-                                Toast.makeText(getApplicationContext(), "아이디와 비밀번호를 확인하세요.", Toast.LENGTH_SHORT).show();
+                                Intent login_intent = new Intent(getApplicationContext(), ShopList.class);
+                                login_intent.putExtra("user_id", user_id);
+                                login_intent.putExtra("user_pw", user_pw);
+                                startActivity(login_intent);
+//                                Toast.makeText(getApplicationContext(), "아이디와 비밀번호를 확인하세요.", Toast.LENGTH_SHORT).show();
                                 return;
                             }
                         } catch (JSONException e) {
